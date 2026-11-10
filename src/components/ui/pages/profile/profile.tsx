@@ -66,7 +66,7 @@ export const ProfileUI = ({
               size="medium"
               onClick={handleCancel}
             >
-              Отменить
+              Отмена
             </Button>
             <Button type="primary" size="medium" htmlType="submit">
               Сохранить
