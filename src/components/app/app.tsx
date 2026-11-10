@@ -47,6 +47,10 @@ const App = (): React.JSX.Element => {
     void dispatch(checkUserAuth());
   }, [dispatch]);
 
+  const handleCloseModal = (): void => {
+    void navigate(-1);
+  };
+
   return (
     <div className={styles.app}>
       <AppHeader />
@@ -104,13 +108,29 @@ const App = (): React.JSX.Element => {
               </ProtectedRouter>
             }
           />
-          <Route path="/ingredients/:id" element={<IngredientDetails />} />
-          <Route path="/feed/:number" element={<OrderInfo />} />
+          <Route
+            path="/ingredients/:id"
+            element={
+              <div className={styles.detailPageWrap}>
+                <IngredientDetails />
+              </div>
+            }
+          />
+          <Route
+            path="/feed/:number"
+            element={
+              <div className={styles.orderPageWrap}>
+                <OrderInfo />
+              </div>
+            }
+          />
           <Route
             path="/profile/orders/:number"
             element={
               <ProtectedRouter>
-                <OrderInfo />
+                <div className={styles.orderPageWrap}>
+                  <OrderInfo />
+                </div>
               </ProtectedRouter>
             }
           />
@@ -123,12 +143,7 @@ const App = (): React.JSX.Element => {
           <Route
             path="/ingredients/:id"
             element={
-              <Modal
-                title="Детали ингредиента"
-                onClose={() => {
-                  void navigate(-1);
-                }}
-              >
+              <Modal onClose={handleCloseModal}>
                 <IngredientDetails />
               </Modal>
             }
@@ -137,12 +152,7 @@ const App = (): React.JSX.Element => {
           <Route
             path="/feed/:number"
             element={
-              <Modal
-                title="Информация о заказе"
-                onClose={() => {
-                  void navigate(-1);
-                }}
-              >
+              <Modal onClose={handleCloseModal}>
                 <OrderInfo />
               </Modal>
             }
@@ -152,12 +162,7 @@ const App = (): React.JSX.Element => {
             path="/profile/orders/:number"
             element={
               <ProtectedRouter>
-                <Modal
-                  title="Информация о заказе"
-                  onClose={() => {
-                    void navigate(-1);
-                  }}
-                >
+                <Modal onClose={handleCloseModal}>
                   <OrderInfo />
                 </Modal>
               </ProtectedRouter>
